@@ -52,7 +52,7 @@ function HelpTip({ title = 'Componente', children }) {
       </button>
 
       {open && (
-        <div className={`${styles.pop} glass`} role="dialog" aria-label={`Sobre: ${title}`}>
+        <div className={styles.pop} role="dialog" aria-label={`Sobre: ${title}`}>
           <p className={styles.popTitle}>Como funciona — {title}</p>
           <div className={styles.popBody}>{children}</div>
         </div>

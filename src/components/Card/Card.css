@@ -1,37 +1,74 @@
-/* Card.css — estilo do invólucro de cada componente */
+/* Card.css — painel de vidro que embrulha cada componente */
 
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  padding: 1.25rem;
+  /* o visual de vidro vem da classe utilitária .glass;
+     aqui ficam só espaçamento e layout interno */
+  padding: 1.4rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.card h2 {
-  font-size: 1.1rem;
+/* brilho sutil no topo do vidro */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+}
+
+/* Etiqueta clara do componente exigido na atividade */
+.card-component {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  background: rgba(190, 242, 100, 0.12);
+  border: 1px solid rgba(190, 242, 100, 0.35);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.card-component strong {
+  color: #fff;
+  margin-left: 2px;
+}
+
+.card-head {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.card h2 {
+  font-size: 1.15rem;
   margin: 0;
 }
 
-.card .badge {
-  font-size: 0.7rem;
+.card-concepts {
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: var(--primary);
   background: var(--primary-soft);
   padding: 2px 8px;
   border-radius: 999px;
 }
 
-.card .desc {
+.card-desc {
   color: var(--text-muted);
   font-size: 0.9rem;
   margin: 0;

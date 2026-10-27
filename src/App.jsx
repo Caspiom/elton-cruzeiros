@@ -1,141 +1,39 @@
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import Card from './components/Card/Card'
-import Accordion from './components/Accordion/Accordion'
-import Tabs from './components/Tabs/Tabs'
-import Dropdown from './components/Dropdown/Dropdown'
-import ProgressDemo from './components/ProgressBar/ProgressDemo'
-import PaginationDemo from './components/Pagination/PaginationDemo'
-import ToastDemo from './components/Toast/ToastDemo'
-import { useToast } from './context/ToastContext'
-
-// Conteúdo fictício, porém semanticamente relevante (FAQ) para o acordeão.
-const faqItems = [
-  {
-    title: 'O que é este projeto?',
-    content:
-      'Uma vitrine de componentes de interface construídos com React.js, demonstrando componentes, props, estado e hooks.',
-  },
-  {
-    title: 'A aplicação é responsiva?',
-    content:
-      'Sim. O layout é mobile-first e se reorganiza em celulares, tablets e desktops usando CSS Grid e media queries.',
-  },
-  {
-    title: 'Quais conceitos de React são usados?',
-    content:
-      'Componentes funcionais, passagem de dados via props, estado local com useState, efeitos com useEffect e manipulação de eventos.',
-  },
-]
-
-// Abas: seções de um perfil de produto (conteúdo fictício e relevante).
-const productTabs = [
-  {
-    label: 'Descrição',
-    content:
-      'Fone de ouvido sem fio com cancelamento ativo de ruído e até 30 horas de bateria.',
-  },
-  {
-    label: 'Especificações',
-    content:
-      'Bluetooth 5.3 · Driver de 40 mm · Peso 250 g · Carregamento USB-C · Resistência a respingos (IPX4).',
-  },
-  {
-    label: 'Avaliações',
-    content:
-      'Nota média 4,7 de 5 em 1.240 avaliações. Destaques: conforto, qualidade de áudio e autonomia.',
-  },
-]
+import NavBar from './components/Layout/NavBar'
+import Footer from './components/Layout/Footer'
+import Home from './pages/Home'
+import Itinerarios from './pages/Itinerarios'
+import Navio from './pages/Navio'
+import Ajuda from './pages/Ajuda'
+import NotFound from './pages/NotFound'
 
 /**
- * App — componente principal que orquestra todos os demais.
+ * App — componente principal que orquestra o layout e as ROTAS.
  *
- * Cada componente visual fica dentro de um <Card> (uma <section>
- * semântica) com título e descrição. A grade é responsiva e se
- * adapta a celular, tablet e desktop (ver App.css).
+ * Estrutura:
+ *  - <NavBar> e <Footer> aparecem em todas as páginas
+ *  - <Routes> troca o conteúdo central conforme a URL (React Router)
  *
- * App consome o contexto global (useToast) para mostrar como um
- * componente dispara notificações compartilhadas: ao escolher uma
- * opção no menu suspenso, uma notificação toast é exibida.
+ * Cada página traz "um pouco da atividade": os 6 componentes exigidos
+ * ficam distribuídos entre as páginas, sempre rotulados claramente.
  */
 function App() {
-  const { notify } = useToast()
-
-  // Opções do menu suspenso (ex.: filtro de ordenação).
-  // Cada opção tem um callback que dispara um toast global.
-  const sortOptions = [
-    { label: 'Mais relevantes' },
-    { label: 'Menor preço' },
-    { label: 'Maior preço' },
-    { label: 'Mais recentes' },
-  ].map((opt) => ({
-    ...opt,
-    onSelect: (o) => notify(`Ordenando por: ${o.label}`, 'info'),
-  }))
-
   return (
     <div className="app">
-      <header className="header">
-        <h1>Vitrine de Componentes React</h1>
-        <p>
-          Acordeão · Paginação · Barra de Progresso · Abas · Menu Suspenso · Toast
-        </p>
-      </header>
+      <NavBar />
 
       <main className="main">
-        <div className="grid">
-          <Card
-            title="Acordeão"
-            badge="useState · props"
-            description="Seções expansíveis/colapsáveis — exemplo de uso: Perguntas Frequentes (FAQ)."
-          >
-            <Accordion items={faqItems} />
-          </Card>
-
-          <Card
-            title="Abas"
-            badge="useState · teclado"
-            description="Organização de conteúdo em painéis — exemplo de uso: detalhes de um produto."
-          >
-            <Tabs tabs={productTabs} />
-          </Card>
-
-          <Card
-            title="Menu Suspenso"
-            badge="useEffect · useRef"
-            description="Seleção de uma opção a partir de uma lista — exemplo de uso: filtro de ordenação."
-          >
-            <Dropdown label="Ordenar por…" options={sortOptions} />
-          </Card>
-
-          <Card
-            title="Barra de Progresso"
-            badge="useEffect · props"
-            description="Indicador visual de progresso — exemplo de uso: upload de arquivo."
-          >
-            <ProgressDemo />
-          </Card>
-
-          <Card
-            title="Paginação"
-            badge="useState · props"
-            description="Navegação entre páginas — exemplo de uso: listagem de produtos."
-          >
-            <PaginationDemo />
-          </Card>
-
-          <Card
-            title="Notificação Toast"
-            badge="Context API (global)"
-            description="Mensagens temporárias de feedback — exemplo de uso: sucesso ou erro ao salvar."
-          >
-            <ToastDemo />
-          </Card>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/itinerarios" element={<Itinerarios />} />
+          <Route path="/navio" element={<Navio />} />
+          <Route path="/ajuda" element={<Ajuda />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
 
-      <footer className="footer">
-        <p>Atividade ReactJS — UCSal · Engenharia de Software</p>
-      </footer>
+      <Footer />
     </div>
   )
 }

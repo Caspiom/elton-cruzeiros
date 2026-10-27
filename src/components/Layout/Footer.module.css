@@ -1,0 +1,71 @@
+/* Footer.module.css */
+
+.footer {
+  margin-top: 3rem;
+  background: rgba(6, 26, 36, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--glass-border);
+  padding: 2rem 1.1rem 1.25rem;
+}
+
+.inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+.brand {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem;
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+  max-width: 42ch;
+}
+
+.cols {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.cols ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.colTitle {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.legal {
+  max-width: 1160px;
+  margin: 1.75rem auto 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+@media (min-width: 720px) {
+  .inner {
+    flex-direction: row;
+  }
+}

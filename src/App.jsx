@@ -3,6 +3,7 @@ import Card from './components/Card/Card'
 import Accordion from './components/Accordion/Accordion'
 import Tabs from './components/Tabs/Tabs'
 import Dropdown from './components/Dropdown/Dropdown'
+import ProgressDemo from './components/ProgressBar/ProgressDemo'
 
 // Conteúdo fictício, porém semanticamente relevante (FAQ) para o acordeão.
 const faqItems = [
@@ -90,6 +91,14 @@ function App() {
             description="Seleção de uma opção a partir de uma lista — exemplo de uso: filtro de ordenação."
           >
             <Dropdown label="Ordenar por…" options={sortOptions} />
+          </Card>
+
+          <Card
+            title="Barra de Progresso"
+            badge="useEffect · props"
+            description="Indicador visual de progresso — exemplo de uso: upload de arquivo."
+          >
+            <ProgressDemo />
           </Card>
         </div>
       </main>

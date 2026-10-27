@@ -4,6 +4,7 @@ import Accordion from './components/Accordion/Accordion'
 import Tabs from './components/Tabs/Tabs'
 import Dropdown from './components/Dropdown/Dropdown'
 import ProgressDemo from './components/ProgressBar/ProgressDemo'
+import PaginationDemo from './components/Pagination/PaginationDemo'
 
 // Conteúdo fictício, porém semanticamente relevante (FAQ) para o acordeão.
 const faqItems = [
@@ -99,6 +100,14 @@ function App() {
             description="Indicador visual de progresso — exemplo de uso: upload de arquivo."
           >
             <ProgressDemo />
+          </Card>
+
+          <Card
+            title="Paginação"
+            badge="useState · props"
+            description="Navegação entre páginas — exemplo de uso: listagem de produtos."
+          >
+            <PaginationDemo />
           </Card>
         </div>
       </main>

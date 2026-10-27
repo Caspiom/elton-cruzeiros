@@ -52,12 +52,37 @@ function Navio() {
         </p>
       </header>
 
+      <div
+        className={styles.shipBanner}
+        style={{ backgroundImage: 'url(/images/ship.jpg)' }}
+      >
+        <div className={`${styles.shipSpecs} glass`}>
+          <div className={styles.specItem}>
+            <span className={styles.specLabel}>Embarcação</span>
+            <strong className={styles.specVal}>MS Elton Star</strong>
+          </div>
+          <div className={styles.specItem}>
+            <span className={styles.specLabel}>Conveses panorâmicos</span>
+            <strong className={styles.specVal}>16 decks</strong>
+          </div>
+          <div className={styles.specItem}>
+            <span className={styles.specLabel}>Acomodações</span>
+            <strong className={styles.specVal}>1.200 cabines</strong>
+          </div>
+          <div className={styles.specItem}>
+            <span className={styles.specLabel}>Autonomia</span>
+            <strong className={styles.specVal}>Propulsão híbrida</strong>
+          </div>
+        </div>
+      </div>
+
       <div className="grid">
         <Card
           title="Explore o Elton Star"
           component="Abas"
           concepts="useState · teclado"
           description="Alterne entre as seções do navio. As setas ← → também navegam."
+          bgImage="/images/island.jpg"
           help={
             <>
               <p>As <strong>Abas</strong> organizam o conteúdo em painéis — só um fica visível por vez.</p>
@@ -76,6 +101,7 @@ function Navio() {
           component="Barra de Progresso"
           concepts="props · 0–100"
           description="Ocupação atual por categoria para a próxima partida."
+          bgImage="/images/sunset.jpg"
           help={
             <>
               <p>A <strong>Barra de Progresso</strong> mostra visualmente quanto de uma cota/tarefa já foi preenchido.</p>

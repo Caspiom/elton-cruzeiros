@@ -1,10 +1,15 @@
 /* Pagination.module.css */
 
 .pagination {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   flex-wrap: wrap;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: rgba(5, 19, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .pages {
@@ -17,33 +22,39 @@
 
 .navBtn,
 .pageBtn {
-  min-width: 36px;
-  height: 36px;
-  padding: 0 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
+  min-width: 38px;
+  height: 38px;
+  padding: 0 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   font-size: 0.9rem;
-  font-weight: 600;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
 .navBtn:hover:not(:disabled),
 .pageBtn:hover:not(.current) {
-  border-color: var(--primary);
-  color: var(--primary);
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .navBtn:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
 .pageBtn.current {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #fff;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--on-primary);
+  box-shadow:
+    0 6px 16px rgba(45, 212, 191, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
   cursor: default;
 }
 

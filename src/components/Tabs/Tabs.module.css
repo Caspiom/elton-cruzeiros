@@ -3,26 +3,30 @@
 .tabs {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.9rem;
 }
 
 .tablist {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
-  border-bottom: 2px solid var(--border);
+  gap: 0.35rem;
+  padding: 0.32rem;
+  border-radius: 14px;
+  background: rgba(5, 19, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .tab {
-  padding: 0.5rem 0.9rem;
-  border: none;
+  flex: 1 1 auto;
+  padding: 0.52rem 0.95rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
   background: transparent;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tab:hover {
@@ -30,15 +34,34 @@
 }
 
 .tab.active {
-  color: var(--primary);
-  border-bottom-color: var(--primary);
+  color: #ffffff;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(45, 212, 191, 0.22) 100%
+    );
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
 }
 
 .panel {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  animation: fade 0.25s ease;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(6, 22, 30, 0.52) 100%
+    );
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.62;
+  animation: fade 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes fade {

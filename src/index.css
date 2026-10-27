@@ -5,39 +5,53 @@
    ============================================================ */
 
 :root {
-  /* Fundo (azul-petróleo profundo em degradê) */
-  --bg-0: #061a24;
-  --bg-1: #0a2c37;
-  --bg-2: #0e3b42;
+  /* Fundo (azul-petróleo abissal com pontos de luz cáustica) */
+  --bg-0: #04131b;
+  --bg-1: #08232e;
+  --bg-2: #0c333b;
 
-  /* Vidro ("liquid glass"): tint escuro + blur COM saturação (ingrediente-chave
-     que evita o aspecto "cinza/fosco") + rim especular + sombra de elevação. */
-  --glass: rgba(12, 35, 44, 0.55);        /* superfície padrão (legível) */
-  --glass-2: rgba(255, 255, 255, 0.06);   /* realce interno sutil */
-  --glass-strong: rgba(8, 26, 33, 0.82);  /* menus/flutuantes sobre fotos */
+  /* Vidro ("liquid glass"): múltiplas camadas de refração + blur com alta
+     saturação + borda especular iluminada no topo/esquerda + sombra profunda. */
+  --glass-tint: rgba(10, 32, 41, 0.56);
+  --glass:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.04) 38%,
+      rgba(8, 28, 36, 0.62) 100%
+    );
+  --glass-2: rgba(255, 255, 255, 0.075);   /* realce interno / cavidade */
+  --glass-strong:
+    linear-gradient(
+      155deg,
+      rgba(22, 54, 66, 0.78) 0%,
+      rgba(7, 23, 30, 0.86) 100%
+    );
   --glass-border: rgba(255, 255, 255, 0.22);
-  --blur: 18px;
-  --glass-filter: blur(18px) saturate(180%) brightness(1.05);
+  --glass-border-strong: rgba(255, 255, 255, 0.34);
+  --blur: 22px;
+  --glass-filter: blur(22px) saturate(195%) brightness(1.06);
   --glass-shadow:
-    0 10px 34px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+    0 20px 48px -12px rgba(2, 10, 15, 0.62),
+    inset 0 1px 1px rgba(255, 255, 255, 0.42),
+    inset 1px 0 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.28);
 
   /* Aliases usados pelos componentes (acordeão, abas, etc.) */
   --surface: var(--glass);
   --surface-2: var(--glass-2);
   --border: var(--glass-border);
 
-  /* Texto */
-  --text: rgba(233, 245, 243, 0.92);
-  --text-muted: rgba(209, 228, 224, 0.68);
-  --heading: #ffffff;
+  /* Texto (tingido na mesma família cromática oceânica, nunca cinza puro) */
+  --text: rgba(235, 247, 245, 0.94);
+  --text-muted: rgba(196, 222, 218, 0.76);
+  --heading: #f8fcfb;
 
-  /* Acentos: teal vibrante + verde-limão (como no mockup) */
+  /* Acentos: turquesa boreal + lima solar */
   --primary: #2dd4bf;
   --primary-hover: #5eead4;
   --primary-soft: rgba(45, 212, 191, 0.16);
-  --on-primary: #04231f;
+  --on-primary: #03201c;
   --accent: #bef264;
   --accent-strong: #a3e635;
 
@@ -47,13 +61,14 @@
   --info: #38bdf8;
   --warning: #fbbf24;
 
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.38);
+  --shadow-sm: 0 6px 18px -4px rgba(2, 10, 15, 0.42);
+  --shadow-md: 0 22px 50px -12px rgba(2, 10, 15, 0.65);
 
-  --radius: 18px;
-  --radius-sm: 12px;
+  --radius: 22px;
+  --radius-sm: 14px;
 
-  --sans: "Inter", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --display: "Fraunces", Georgia, serif;
+  --sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
 
   color-scheme: dark;
@@ -62,6 +77,28 @@
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(45, 212, 191, 0.32);
+  color: #ffffff;
+}
+
+/* Barra de rolagem temática */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-0);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(45, 212, 191, 0.26);
+  border-radius: 999px;
+  border: 2px solid var(--bg-0);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(45, 212, 191, 0.45);
 }
 
 * {
@@ -77,21 +114,33 @@ body {
 body {
   min-height: 100svh;
   color: var(--text);
-  /* Degradê de fundo + leve textura radial de luz */
+  /* Degradê abissal + pontos de luz cáustica que alimentam o backdrop-filter dos cards */
   background:
-    radial-gradient(900px 500px at 15% -10%, rgba(45, 212, 191, 0.18), transparent 60%),
-    radial-gradient(1000px 600px at 110% 10%, rgba(190, 242, 100, 0.12), transparent 55%),
-    linear-gradient(160deg, var(--bg-0), var(--bg-1) 45%, var(--bg-2));
+    radial-gradient(920px 540px at 12% 4%, rgba(45, 212, 191, 0.24), transparent 62%),
+    radial-gradient(880px 520px at 88% 18%, rgba(190, 242, 100, 0.15), transparent 58%),
+    radial-gradient(960px 620px at 50% 88%, rgba(56, 189, 248, 0.16), transparent 64%),
+    linear-gradient(165deg, var(--bg-0) 0%, var(--bg-1) 48%, var(--bg-2) 100%);
   background-attachment: fixed;
 }
 
 h1,
-h2,
-h3 {
+h2 {
+  font-family: var(--display);
   color: var(--heading);
-  line-height: 1.15;
+  line-height: 1.12;
   margin: 0 0 0.5rem;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--sans);
+  color: var(--heading);
+  line-height: 1.22;
+  margin: 0 0 0.4rem;
   letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 p {
@@ -101,14 +150,16 @@ p {
 a {
   color: var(--primary);
   text-decoration: none;
+  text-underline-offset: 3px;
 }
 
 code {
   font-family: var(--mono);
   background: var(--glass-2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 0.9em;
+  border-radius: 6px;
+  font-size: 0.88em;
 }
 
 button {
@@ -154,27 +205,45 @@ img {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.7rem 1.2rem;
+  padding: 0.68rem 1.25rem;
   border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
   border: 1px solid transparent;
-  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .btn:hover {
   transform: translateY(-1px);
 }
+.btn:active {
+  transform: translateY(0);
+}
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color: var(--on-primary);
-  box-shadow: 0 8px 24px rgba(45, 212, 191, 0.3);
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 10px 26px -6px rgba(45, 212, 191, 0.42),
+    inset 0 1px 1px rgba(255, 255, 255, 0.65);
+}
+.btn-primary:hover {
+  box-shadow:
+    0 14px 32px -6px rgba(190, 242, 100, 0.46),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 .btn-ghost {
   background: var(--glass);
-  border-color: var(--glass-border);
-  color: var(--text);
+  border-color: var(--glass-border-strong);
+  color: var(--heading);
   backdrop-filter: var(--glass-filter);
   -webkit-backdrop-filter: var(--glass-filter);
+  box-shadow:
+    0 8px 20px -6px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.btn-ghost:hover {
+  border-color: var(--primary);
 }
 
 /* Foco visível para acessibilidade (teclado) */

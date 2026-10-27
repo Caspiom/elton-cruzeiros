@@ -71,42 +71,65 @@ function Itinerarios() {
         </p>
       </header>
 
-      {/* Barra de ferramentas: Menu Suspenso (rotulado) */}
-      <div className={styles.toolbar}>
-        <span className={styles.count}>{ordenados.length} cruzeiros encontrados</span>
+      {/* Barra de ferramentas em vidro líquido: Menu Suspenso (rotulado) */}
+      <div className={`${styles.toolbar} glass`}>
+        <div className={styles.toolbarInfo}>
+          <span className={styles.countBadge}>{ordenados.length} roteiros</span>
+          <span className={styles.count}>Exibindo {start + 1}–{Math.min(start + PER_PAGE, ordenados.length)} de {ordenados.length} travessias</span>
+        </div>
         <div className={styles.sortBox}>
-          <span className="card-component">
-            <span aria-hidden="true">🧩</span>&nbsp;Componente:&nbsp;<strong>Menu Suspenso</strong>
-          </span>
-          <HelpTip title="Menu Suspenso">
-            <p>O <strong>Menu Suspenso</strong> (dropdown) revela uma lista de opções a partir de um botão.</p>
-            <p><strong>Como funciona:</strong> o estado (<code>useState</code>) controla se está aberto. Ao escolher uma opção, o menu chama o <code>callback</code> dela e se fecha.</p>
-            <p><strong>Fecha sozinho:</strong> <code>useRef</code> + <code>useEffect</code> detectam clique fora ou tecla <code>Escape</code> (com limpeza do listener).</p>
-            <p><strong>O que recebe:</strong> as opções por <code>props</code> ({'{ options: [{ label, onSelect }] }'}).</p>
-            <p><strong>Liga-se a:</strong> ao escolher, reordena a lista (muda o estado) e dispara um <strong>toast</strong> via Context.</p>
-          </HelpTip>
+          <div className="card-component-row">
+            <span className="card-component">
+              <svg className="component-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M7.2 2.5a1.5 1.5 0 0 1 3 0v.7h1.6a1.7 1.7 0 0 1 1.7 1.7v1.6h-.7a1.5 1.5 0 0 0 0 3h.7v1.6a1.7 1.7 0 0 1-1.7 1.7H3.9a1.7 1.7 0 0 1-1.7-1.7V4.9a1.7 1.7 0 0 1 1.7-1.7h3.3v-.7Z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Componente:&nbsp;<strong>Menu Suspenso</strong>
+            </span>
+            <HelpTip title="Menu Suspenso">
+              <p>O <strong>Menu Suspenso</strong> (dropdown) revela uma lista de opções a partir de um botão.</p>
+              <p><strong>Como funciona:</strong> o estado (<code>useState</code>) controla se está aberto. Ao escolher uma opção, o menu chama o <code>callback</code> dela e se fecha.</p>
+              <p><strong>Fecha sozinho:</strong> <code>useRef</code> + <code>useEffect</code> detectam clique fora ou tecla <code>Escape</code> (com limpeza do listener).</p>
+              <p><strong>O que recebe:</strong> as opções por <code>props</code> ({'{ options: [{ label, onSelect }] }'}).</p>
+              <p><strong>Liga-se a:</strong> ao escolher, reordena a lista (muda o estado) e dispara um <strong>toast</strong> via Context.</p>
+            </HelpTip>
+          </div>
           <Dropdown label="Ordenar por…" options={sortOptions} />
         </div>
       </div>
 
-      {/* Resultados */}
+      {/* Resultados com cards em Liquid Glass real sobre a fotografia */}
       <ul className={styles.results}>
         {visiveis.map((c) => (
-          <li key={c.id} className={`${styles.cruise} glass`}>
+          <li key={c.id} className={styles.cruise}>
             <div
-              className={styles.thumb}
+              className={styles.photoBackdrop}
               style={{ backgroundImage: `url(${c.img})` }}
               role="img"
               aria-label={`Paisagem de ${c.nome}`}
-            >
-              <span className={styles.nota}>★ {c.nota.toFixed(1)}</span>
+            />
+            <div className={styles.cardTop}>
+              <span className={styles.regiao}>{c.regiao}</span>
+              <span className={styles.nota} aria-label={`Avaliação ${c.nota.toFixed(1)} de 5`}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5l2.85 5.78 6.38.93-4.61 4.5 1.09 6.35L12 17.06l-5.71 3 1.09-6.35-4.61-4.5 6.38-.93L12 2.5z" />
+                </svg>
+                {c.nota.toFixed(1)}
+              </span>
             </div>
             <div className={styles.info}>
-              <span className={styles.regiao}>{c.regiao}</span>
-              <h3>{c.nome}</h3>
-              <p className={styles.meta}>{c.noites} noites · pensão completa</p>
+              <div className={styles.infoHeader}>
+                <h3>{c.nome}</h3>
+                <p className={styles.meta}>
+                  <span>{c.noites} noites</span>
+                  <span className={styles.dot} aria-hidden="true" />
+                  <span>Pensão completa</span>
+                </p>
+              </div>
               <div className={styles.bottom}>
-                <span className={styles.preco}>{brl(c.preco)}</span>
+                <div className={styles.priceBlock}>
+                  <span className={styles.priceLabel}>Por pessoa</span>
+                  <span className={styles.preco}>{brl(c.preco)}</span>
+                </div>
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -120,11 +143,14 @@ function Itinerarios() {
         ))}
       </ul>
 
-      {/* Paginação (rotulada) */}
-      <div className={styles.pagerBox}>
+      {/* Paginação (rotulada) em dock de vidro líquido */}
+      <div className={`${styles.pagerBox} glass`}>
         <div className="card-component-row">
           <span className="card-component">
-            <span aria-hidden="true">🧩</span>&nbsp;Componente:&nbsp;<strong>Paginação</strong>
+            <svg className="component-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M7.2 2.5a1.5 1.5 0 0 1 3 0v.7h1.6a1.7 1.7 0 0 1 1.7 1.7v1.6h-.7a1.5 1.5 0 0 0 0 3h.7v1.6a1.7 1.7 0 0 1-1.7 1.7H3.9a1.7 1.7 0 0 1-1.7-1.7V4.9a1.7 1.7 0 0 1 1.7-1.7h3.3v-.7Z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Componente:&nbsp;<strong>Paginação</strong>
           </span>
           <HelpTip title="Paginação">
             <p>A <strong>Paginação</strong> divide uma lista longa em páginas e navega entre elas.</p>

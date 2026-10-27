@@ -1,24 +1,50 @@
 /* Itinerarios.module.css */
 
 .toolbar {
+  position: relative;
+  z-index: 40;
+  overflow: visible;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.toolbarInfo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.countBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-hover);
+  background: rgba(45, 212, 191, 0.14);
+  border: 1px solid rgba(45, 212, 191, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  font-variant-numeric: tabular-nums;
 }
 
 .count {
   color: var(--text-muted);
   font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .sortBox {
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
 }
 
 /* Lista de resultados: grade responsiva */
@@ -27,86 +53,210 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 1.25rem;
+  gap: 1.4rem;
   grid-template-columns: 1fr;
 }
 
+/* Cada card é uma vitrine fotográfica com painel interno em Liquid Glass real
+   (mesma receita óptica do menu Ordenar por, refratando a foto de fundo) */
 .cruise {
+  position: relative;
+  min-height: 390px;
+  border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow:
+    0 24px 52px -14px rgba(2, 10, 15, 0.68),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  background: var(--bg-1);
+  isolation: isolate;
 }
 
-.thumb {
-  position: relative;
-  height: 170px;
+/* Fotografia preenche todo o card para que o painel de vidro refrate as cores reais */
+.photoBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
   background-size: cover;
   background-position: center;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.nota {
+/* Vinheta suave que preserva a luminosidade da foto mas dá leitura às pílulas */
+.cruise::after {
+  content: "";
   position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  background: rgba(6, 26, 36, 0.7);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 0.8rem;
-  padding: 3px 9px;
-  border-radius: 999px;
-  border: 1px solid var(--glass-border);
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 18, 25, 0.28) 0%,
+      rgba(4, 18, 25, 0.04) 38%,
+      rgba(4, 18, 25, 0.42) 72%,
+      rgba(4, 18, 25, 0.72) 100%
+    );
+  pointer-events: none;
 }
 
-.info {
-  padding: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  flex: 1;
+.cruise:hover .photoBackdrop {
+  transform: scale(1.045);
 }
 
-.regiao {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--primary);
-}
-
-.info h3 {
-  margin: 0;
-  font-size: 1.15rem;
-}
-
-.meta {
-  color: var(--text-muted);
-  font-size: 0.88rem;
-  margin: 0;
-}
-
-.bottom {
-  margin-top: auto;
-  padding-top: 0.75rem;
+/* Topo do card: região e nota flutuando em cápsulas de vidro líquido */
+.cardTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
 }
 
+.regiao {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.34rem 0.78rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #f4fbf9;
+  background: var(--glass-strong);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.nota {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--glass-strong);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  padding: 0.34rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+/* Painel inferior flutuante em Liquid Glass (idêntico ao efeito do menu Ordenar por) */
+.info {
+  margin-top: auto;
+  padding: 1.15rem 1.2rem;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(14, 42, 53, 0.68) 42%,
+      rgba(6, 22, 29, 0.8) 100%
+    );
+  backdrop-filter: blur(22px) saturate(200%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(200%) brightness(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.42),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .info,
+  .regiao,
+  .nota {
+    background: rgba(8, 24, 31, 0.94);
+  }
+}
+
+.infoHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info h3 {
+  font-family: var(--display);
+  margin: 0;
+  font-size: 1.28rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(219, 238, 234, 0.84);
+  font-size: 0.86rem;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0.85;
+}
+
+.bottom {
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.priceLabel {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .preco {
-  color: #fff;
+  color: #ffffff;
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .pagerBox {
+  position: relative;
+  z-index: 30;
+  overflow: visible;
   margin-top: 1.75rem;
+  padding: 0.9rem 1.35rem;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: space-between;
+  gap: 0.85rem;
 }
 
 /* Responsivo */

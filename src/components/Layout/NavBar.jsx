@@ -28,7 +28,14 @@ function NavBar() {
     <header className={styles.header}>
       <nav className={styles.nav} aria-label="Navegação principal">
         <Link to="/" className={styles.brand} onClick={close}>
-          <span className={styles.logo} aria-hidden="true">⚓</span>
+          <span className={styles.logo} aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="5" r="2" />
+              <line x1="12" y1="7" x2="12" y2="21" />
+              <path d="M5 13H2a10 10 0 0 0 20 0h-3" />
+              <line x1="8" y1="10" x2="16" y2="10" />
+            </svg>
+          </span>
           <span>
             Elton<strong>Cruzeiros</strong>
           </span>

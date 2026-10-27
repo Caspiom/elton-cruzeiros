@@ -49,6 +49,7 @@ function Ajuda() {
         component="Acordeão"
         concepts="useState · props"
         description="Apenas uma resposta fica aberta por vez, com transição suave."
+        bgImage="/images/mountains.jpg"
         help={
           <>
             <p>O <strong>Acordeão</strong> empilha seções que expandem e colapsam — ideal para FAQ.</p>

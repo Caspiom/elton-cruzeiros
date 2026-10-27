@@ -1,13 +1,31 @@
 /* Accordion.module.css — escopo local via CSS Modules */
 
 .accordion {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.item + .item {
-  border-top: 1px solid var(--border);
+.item {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(8, 28, 36, 0.56) 100%
+    );
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow:
+    0 8px 24px -6px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item:hover {
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .heading {
@@ -21,45 +39,55 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  background: var(--surface);
+  padding: 0.95rem 1.15rem;
+  background: transparent;
   color: var(--heading);
   border: none;
   text-align: left;
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   font-weight: 600;
   transition: background 0.2s ease;
 }
 
 .trigger:hover {
-  background: var(--surface-2);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .icon {
   flex: none;
-  font-size: 1.25rem;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(45, 212, 191, 0.14);
+  border: 1px solid rgba(45, 212, 191, 0.32);
+  font-size: 1.05rem;
   line-height: 1;
-  color: var(--primary);
+  color: var(--primary-hover);
 }
 
 /* Painel: anima a altura via grid-template-rows 0fr -> 1fr */
 .panel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease;
-  background: var(--surface-2);
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  background: rgba(4, 16, 22, 0.38);
 }
 
 .panel.open {
   grid-template-rows: 1fr;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .panelInner {
   overflow: hidden;
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 .panel.open .panelInner {
-  padding: 0.85rem 1rem;
+  padding: 0.95rem 1.15rem;
 }

@@ -30,7 +30,7 @@ function NavBar() {
         <Link to="/" className={styles.brand} onClick={close}>
           <span className={styles.logo} aria-hidden="true">⚓</span>
           <span>
-            Aurora<strong>Cruzeiros</strong>
+            Elton<strong>Cruzeiros</strong>
           </span>
         </Link>
 

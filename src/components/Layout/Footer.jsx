@@ -9,7 +9,7 @@ function Footer() {
       <div className={styles.inner}>
         <div>
           <p className={styles.brand}>
-            <span aria-hidden="true">⚓</span> Aurora Cruzeiros
+            <span aria-hidden="true">⚓</span> Elton Cruzeiros
           </p>
           <p className={styles.muted}>
             Travessias por fiordes, ilhas e costas deslumbrantes desde 1998.

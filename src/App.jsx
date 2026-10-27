@@ -2,6 +2,7 @@ import './App.css'
 import Card from './components/Card/Card'
 import Accordion from './components/Accordion/Accordion'
 import Tabs from './components/Tabs/Tabs'
+import Dropdown from './components/Dropdown/Dropdown'
 
 // Conteúdo fictício, porém semanticamente relevante (FAQ) para o acordeão.
 const faqItems = [
@@ -22,6 +23,13 @@ const faqItems = [
   },
 ]
 
+// Opções do menu suspenso (ex.: filtro de ordenação).
+const sortOptions = [
+  { label: 'Mais relevantes' },
+  { label: 'Menor preço' },
+  { label: 'Maior preço' },
+  { label: 'Mais recentes' },
+]
 // Abas: seções de um perfil de produto (conteúdo fictício e relevante).
 const productTabs = [
   {
@@ -74,6 +82,14 @@ function App() {
             description="Organização de conteúdo em painéis — exemplo de uso: detalhes de um produto."
           >
             <Tabs tabs={productTabs} />
+          </Card>
+
+          <Card
+            title="Menu Suspenso"
+            badge="useEffect · useRef"
+            description="Seleção de uma opção a partir de uma lista — exemplo de uso: filtro de ordenação."
+          >
+            <Dropdown label="Ordenar por…" options={sortOptions} />
           </Card>
         </div>
       </main>

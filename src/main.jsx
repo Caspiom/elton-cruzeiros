@@ -1,15 +1,20 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { HashRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import { ToastProvider } from './context/ToastContext.jsx'
 
-// ToastProvider envolve toda a aplicação para que qualquer
-// componente possa disparar notificações (estado global - Context API).
+// Dois recursos de ponto extra combinados:
+//  - HashRouter: navegação entre páginas (React Router). HashRouter
+//    funciona sem configuração de servidor (ideal para GitHub Pages).
+//  - ToastProvider: estado global via Context API para notificações.
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ToastProvider>
-      <App />
-    </ToastProvider>
+    <HashRouter>
+      <ToastProvider>
+        <App />
+      </ToastProvider>
+    </HashRouter>
   </StrictMode>,
 )

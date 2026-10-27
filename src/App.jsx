@@ -1,6 +1,7 @@
 import './App.css'
 import Card from './components/Card/Card'
 import Accordion from './components/Accordion/Accordion'
+import Tabs from './components/Tabs/Tabs'
 
 // Conteúdo fictício, porém semanticamente relevante (FAQ) para o acordeão.
 const faqItems = [
@@ -18,6 +19,25 @@ const faqItems = [
     title: 'Quais conceitos de React são usados?',
     content:
       'Componentes funcionais, passagem de dados via props, estado local com useState, efeitos com useEffect e manipulação de eventos.',
+  },
+]
+
+// Abas: seções de um perfil de produto (conteúdo fictício e relevante).
+const productTabs = [
+  {
+    label: 'Descrição',
+    content:
+      'Fone de ouvido sem fio com cancelamento ativo de ruído e até 30 horas de bateria.',
+  },
+  {
+    label: 'Especificações',
+    content:
+      'Bluetooth 5.3 · Driver de 40 mm · Peso 250 g · Carregamento USB-C · Resistência a respingos (IPX4).',
+  },
+  {
+    label: 'Avaliações',
+    content:
+      'Nota média 4,7 de 5 em 1.240 avaliações. Destaques: conforto, qualidade de áudio e autonomia.',
   },
 ]
 
@@ -46,6 +66,14 @@ function App() {
             description="Seções expansíveis/colapsáveis — exemplo de uso: Perguntas Frequentes (FAQ)."
           >
             <Accordion items={faqItems} />
+          </Card>
+
+          <Card
+            title="Abas"
+            badge="useState · teclado"
+            description="Organização de conteúdo em painéis — exemplo de uso: detalhes de um produto."
+          >
+            <Tabs tabs={productTabs} />
           </Card>
         </div>
       </main>

@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cola pessoal do vídeo (não faz parte da entrega)
+ROTEIRO-VIDEO.md

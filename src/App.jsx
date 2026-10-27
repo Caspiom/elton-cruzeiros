@@ -5,6 +5,8 @@ import Tabs from './components/Tabs/Tabs'
 import Dropdown from './components/Dropdown/Dropdown'
 import ProgressDemo from './components/ProgressBar/ProgressDemo'
 import PaginationDemo from './components/Pagination/PaginationDemo'
+import ToastDemo from './components/Toast/ToastDemo'
+import { useToast } from './context/ToastContext'
 
 // Conteúdo fictício, porém semanticamente relevante (FAQ) para o acordeão.
 const faqItems = [
@@ -25,13 +27,6 @@ const faqItems = [
   },
 ]
 
-// Opções do menu suspenso (ex.: filtro de ordenação).
-const sortOptions = [
-  { label: 'Mais relevantes' },
-  { label: 'Menor preço' },
-  { label: 'Maior preço' },
-  { label: 'Mais recentes' },
-]
 // Abas: seções de um perfil de produto (conteúdo fictício e relevante).
 const productTabs = [
   {
@@ -57,8 +52,26 @@ const productTabs = [
  * Cada componente visual fica dentro de um <Card> (uma <section>
  * semântica) com título e descrição. A grade é responsiva e se
  * adapta a celular, tablet e desktop (ver App.css).
+ *
+ * App consome o contexto global (useToast) para mostrar como um
+ * componente dispara notificações compartilhadas: ao escolher uma
+ * opção no menu suspenso, uma notificação toast é exibida.
  */
 function App() {
+  const { notify } = useToast()
+
+  // Opções do menu suspenso (ex.: filtro de ordenação).
+  // Cada opção tem um callback que dispara um toast global.
+  const sortOptions = [
+    { label: 'Mais relevantes' },
+    { label: 'Menor preço' },
+    { label: 'Maior preço' },
+    { label: 'Mais recentes' },
+  ].map((opt) => ({
+    ...opt,
+    onSelect: (o) => notify(`Ordenando por: ${o.label}`, 'info'),
+  }))
+
   return (
     <div className="app">
       <header className="header">
@@ -108,6 +121,14 @@ function App() {
             description="Navegação entre páginas — exemplo de uso: listagem de produtos."
           >
             <PaginationDemo />
+          </Card>
+
+          <Card
+            title="Notificação Toast"
+            badge="Context API (global)"
+            description="Mensagens temporárias de feedback — exemplo de uso: sucesso ou erro ao salvar."
+          >
+            <ToastDemo />
           </Card>
         </div>
       </main>

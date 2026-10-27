@@ -14,17 +14,21 @@
   justify-content: space-between;
   gap: 0.5rem;
   padding: 0.6rem 0.9rem;
-  background: var(--surface);
+  background: var(--glass-strong);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
   color: var(--heading);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
   font-size: 0.9rem;
   font-weight: 600;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .trigger:hover {
   border-color: var(--primary);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 0 0 2px var(--primary-soft);
 }
 
 .caret {
@@ -39,17 +43,29 @@
 .menu {
   position: absolute;
   z-index: 10;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0;
   right: 0;
   margin: 0;
-  padding: 0.25rem;
+  padding: 0.3rem;
   list-style: none;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  /* Menu flutua sobre fotos: fill forte (quase opaco) + blur+saturate
+     garante leitura; rim especular dá o aspecto de vidro iluminado. */
+  background: var(--glass-strong);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--glass-shadow);
   animation: dropIn 0.15s ease;
+}
+
+/* Fallbacks de legibilidade para o menu */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .menu,
+  .trigger {
+    background: rgba(8, 24, 31, 0.96);
+  }
 }
 
 @keyframes dropIn {

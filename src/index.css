@@ -10,12 +10,18 @@
   --bg-1: #0a2c37;
   --bg-2: #0e3b42;
 
-  /* Vidro (painéis translúcidos) */
-  --glass: rgba(255, 255, 255, 0.08);
-  --glass-2: rgba(255, 255, 255, 0.05);
-  --glass-strong: rgba(255, 255, 255, 0.14);
+  /* Vidro ("liquid glass"): tint escuro + blur COM saturação (ingrediente-chave
+     que evita o aspecto "cinza/fosco") + rim especular + sombra de elevação. */
+  --glass: rgba(12, 35, 44, 0.55);        /* superfície padrão (legível) */
+  --glass-2: rgba(255, 255, 255, 0.06);   /* realce interno sutil */
+  --glass-strong: rgba(8, 26, 33, 0.82);  /* menus/flutuantes sobre fotos */
   --glass-border: rgba(255, 255, 255, 0.22);
-  --blur: 16px;
+  --blur: 18px;
+  --glass-filter: blur(18px) saturate(180%) brightness(1.05);
+  --glass-shadow:
+    0 10px 34px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
 
   /* Aliases usados pelos componentes (acordeão, abas, etc.) */
   --surface: var(--glass);
@@ -119,11 +125,27 @@ img {
 /* -------- Utilitários de vidro reutilizáveis -------- */
 .glass {
   background: var(--glass);
-  backdrop-filter: blur(var(--blur));
-  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Sem suporte a backdrop-filter: fica quase opaco p/ o texto não sumir */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgba(10, 30, 38, 0.92);
+  }
+}
+
+/* Respeita a preferência de reduzir transparência (acessibilidade do SO) */
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: rgba(10, 30, 38, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 /* Botões reutilizáveis */
@@ -151,8 +173,8 @@ img {
   background: var(--glass);
   border-color: var(--glass-border);
   color: var(--text);
-  backdrop-filter: blur(var(--blur));
-  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
 }
 
 /* Foco visível para acessibilidade (teclado) */

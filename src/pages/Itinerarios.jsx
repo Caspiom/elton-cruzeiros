@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import Dropdown from '../components/Dropdown/Dropdown'
 import Pagination from '../components/Pagination/Pagination'
+import HelpTip from '../components/HelpTip/HelpTip'
 import { useToast } from '../context/ToastContext'
 import styles from './Itinerarios.module.css'
 
@@ -77,6 +78,13 @@ function Itinerarios() {
           <span className="card-component">
             <span aria-hidden="true">🧩</span>&nbsp;Componente:&nbsp;<strong>Menu Suspenso</strong>
           </span>
+          <HelpTip title="Menu Suspenso">
+            <p>O <strong>Menu Suspenso</strong> (dropdown) revela uma lista de opções a partir de um botão.</p>
+            <p><strong>Como funciona:</strong> o estado (<code>useState</code>) controla se está aberto. Ao escolher uma opção, o menu chama o <code>callback</code> dela e se fecha.</p>
+            <p><strong>Fecha sozinho:</strong> <code>useRef</code> + <code>useEffect</code> detectam clique fora ou tecla <code>Escape</code> (com limpeza do listener).</p>
+            <p><strong>O que recebe:</strong> as opções por <code>props</code> ({'{ options: [{ label, onSelect }] }'}).</p>
+            <p><strong>Liga-se a:</strong> ao escolher, reordena a lista (muda o estado) e dispara um <strong>toast</strong> via Context.</p>
+          </HelpTip>
           <Dropdown label="Ordenar por…" options={sortOptions} />
         </div>
       </div>
@@ -114,9 +122,17 @@ function Itinerarios() {
 
       {/* Paginação (rotulada) */}
       <div className={styles.pagerBox}>
-        <span className="card-component">
-          <span aria-hidden="true">🧩</span>&nbsp;Componente:&nbsp;<strong>Paginação</strong>
-        </span>
+        <div className="card-component-row">
+          <span className="card-component">
+            <span aria-hidden="true">🧩</span>&nbsp;Componente:&nbsp;<strong>Paginação</strong>
+          </span>
+          <HelpTip title="Paginação">
+            <p>A <strong>Paginação</strong> divide uma lista longa em páginas e navega entre elas.</p>
+            <p><strong>Como funciona:</strong> é um componente <strong>controlado</strong> — recebe por <code>props</code> o total de páginas e a página atual, e avisa a mudança pelo <code>callback</code> <code>onPageChange</code>.</p>
+            <p><strong>Botões:</strong> "anterior/próxima" ficam <strong>desabilitados</strong> nos extremos; a página atual é destacada com <code>aria-current</code>.</p>
+            <p><strong>Liga-se a:</strong> o estado <code>page</code> desta página, que fatia (<code>slice</code>) a lista de cruzeiros exibida.</p>
+          </HelpTip>
+        </div>
         <Pagination totalPages={totalPages} currentPage={page} onPageChange={setPage} />
       </div>
     </div>

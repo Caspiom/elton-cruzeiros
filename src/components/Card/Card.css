@@ -26,6 +26,12 @@
 }
 
 /* Etiqueta clara do componente exigido na atividade */
+.card-component-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .card-component {
   align-self: flex-start;
   display: inline-flex;

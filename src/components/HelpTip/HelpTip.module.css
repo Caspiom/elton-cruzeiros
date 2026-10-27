@@ -1,0 +1,105 @@
+/* HelpTip.module.css */
+
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.trigger {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: rgba(190, 242, 100, 0.14);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 0;
+}
+
+.trigger:hover {
+  background: var(--accent);
+  color: var(--on-primary);
+}
+
+.pop {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 8px);
+  left: 0;
+  width: min(300px, 78vw);
+  padding: 0.9rem 1rem;
+  text-align: left;
+  animation: popIn 0.15s ease;
+}
+
+/* Seta do popover */
+.pop::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  border-left: 1px solid var(--glass-border);
+  border-top: 1px solid var(--glass-border);
+  transform: rotate(45deg);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popTitle {
+  margin: 0 0 0.4rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.popBody {
+  color: var(--text);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.popBody p {
+  margin: 0 0 0.5rem;
+}
+.popBody p:last-child {
+  margin-bottom: 0;
+}
+.popBody strong {
+  color: #fff;
+}
+.popBody code {
+  font-size: 0.78rem;
+}
+
+/* Alinha o popover à direita quando perto da borda direita */
+@media (max-width: 520px) {
+  .pop {
+    left: auto;
+    right: 0;
+  }
+  .pop::before {
+    left: auto;
+    right: 14px;
+  }
+}

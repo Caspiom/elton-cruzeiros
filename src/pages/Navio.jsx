@@ -45,7 +45,7 @@ function Navio() {
   return (
     <div className="page">
       <header className="pageHead">
-        <h1>Nosso Navio — Aurora Star</h1>
+        <h1>Nosso Navio — Elton Star</h1>
         <p>
           16 decks, 1.200 cabines e vista para o oceano em cada corredor.
           Conheça as seções e a disponibilidade atual.
@@ -54,10 +54,19 @@ function Navio() {
 
       <div className="grid">
         <Card
-          title="Explore o Aurora Star"
+          title="Explore o Elton Star"
           component="Abas"
           concepts="useState · teclado"
           description="Alterne entre as seções do navio. As setas ← → também navegam."
+          help={
+            <>
+              <p>As <strong>Abas</strong> organizam o conteúdo em painéis — só um fica visível por vez.</p>
+              <p><strong>Como funciona:</strong> o estado (<code>useState</code>) guarda o índice da aba ativa; ao clicar (ou usar as setas ← →) o estado muda e o painel correspondente é exibido.</p>
+              <p><strong>O que recebe:</strong> a lista de abas por <code>props</code> ({'{ tabs: [{ label, content }] }'}).</p>
+              <p><strong>Liga-se a:</strong> os dados <code>navioTabs</code> definidos nesta página.</p>
+              <p><strong>Acessibilidade:</strong> <code>role=tablist/tab/tabpanel</code>, <code>aria-selected</code> e foco "roving" (<code>tabIndex</code>).</p>
+            </>
+          }
         >
           <Tabs tabs={navioTabs} />
         </Card>
@@ -67,6 +76,14 @@ function Navio() {
           component="Barra de Progresso"
           concepts="props · 0–100"
           description="Ocupação atual por categoria para a próxima partida."
+          help={
+            <>
+              <p>A <strong>Barra de Progresso</strong> mostra visualmente quanto de uma cota/tarefa já foi preenchido.</p>
+              <p><strong>Como funciona:</strong> é um componente "puro" — recebe o valor (0–100) por <code>props</code> e ajusta a largura do preenchimento. O valor é limitado (clamp) a 0–100.</p>
+              <p><strong>Liga-se a:</strong> os dados <code>ocupacao</code> desta página — uma barra por categoria de cabine.</p>
+              <p><strong>Acessibilidade:</strong> <code>role=progressbar</code> com <code>aria-valuenow/valuemin/valuemax</code>.</p>
+            </>
+          }
         >
           <div className={styles.bars}>
             {ocupacao.map((o) => (

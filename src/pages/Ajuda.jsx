@@ -21,7 +21,7 @@ const faq = [
   {
     title: 'Há atividades para crianças?',
     content:
-      'Sim! O Aurora Star tem clube infantil com monitores, cinema ao ar livre, piscina rasa e oficinas temáticas durante toda a travessia.',
+      'Sim! O Elton Star tem clube infantil com monitores, cinema ao ar livre, piscina rasa e oficinas temáticas durante toda a travessia.',
   },
   {
     title: 'Qual a política de bagagem?',
@@ -49,6 +49,15 @@ function Ajuda() {
         component="Acordeão"
         concepts="useState · props"
         description="Apenas uma resposta fica aberta por vez, com transição suave."
+        help={
+          <>
+            <p>O <strong>Acordeão</strong> empilha seções que expandem e colapsam — ideal para FAQ.</p>
+            <p><strong>Como funciona:</strong> o estado (<code>useState</code>) guarda qual item está aberto; clicar no título alterna. Só um abre por vez e a transição de altura é suave (CSS grid).</p>
+            <p><strong>O que recebe:</strong> os itens por <code>props</code> ({'{ items: [{ title, content }] }'}).</p>
+            <p><strong>Liga-se a:</strong> a lista <code>faq</code> definida nesta página.</p>
+            <p><strong>Acessibilidade:</strong> cada título é um <code>button</code> com <code>aria-expanded</code>/<code>aria-controls</code> e o conteúdo é uma <code>region</code>.</p>
+          </>
+        }
       >
         <Accordion items={faq} />
       </Card>

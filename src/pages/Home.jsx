@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useToast } from '../context/ToastContext'
+import HelpTip from '../components/HelpTip/HelpTip'
 import styles from './Home.module.css'
 
 /**
@@ -39,7 +40,7 @@ function Home() {
             <h1>Sinta a calma do mar em cada detalhe</h1>
             <p>
               Entenda seu roteiro, acompanhe a disponibilidade de cabines e veja
-              as próximas partidas — tudo em um só lugar, com a Aurora Cruzeiros.
+              as próximas partidas — tudo em um só lugar, com a Elton Cruzeiros.
             </p>
             <div className={styles.heroActions}>
               <Link to="/itinerarios" className="btn btn-primary">
@@ -89,9 +90,18 @@ function Home() {
 
         {/* ---------- NEWSLETTER (Componente: Toast) ---------- */}
         <div className={`${styles.news} glass`}>
-          <span className="card-component" style={{ alignSelf: 'flex-start' }}>
-            <span aria-hidden="true">🧩</span>&nbsp;Componente:&nbsp;<strong>Notificação Toast</strong>
-          </span>
+          <div className="card-component-row" style={{ alignSelf: 'flex-start' }}>
+            <span className="card-component">
+              <span aria-hidden="true">🧩</span>&nbsp;Componente:&nbsp;<strong>Notificação Toast</strong>
+            </span>
+            <HelpTip title="Notificação Toast">
+              <p>O <strong>Toast</strong> mostra mensagens temporárias de feedback (sucesso, erro, aviso, info) num canto da tela.</p>
+              <p><strong>Como funciona:</strong> usa <strong>estado global</strong> via <strong>Context API</strong> (<code>ToastProvider</code> + hook <code>useToast()</code>). Chamar <code>notify(mensagem, tipo)</code> adiciona um toast à lista.</p>
+              <p><strong>Some sozinho:</strong> cada toast usa <code>useEffect</code> + <code>setTimeout</code> para se fechar após alguns segundos (ou no botão ×).</p>
+              <p><strong>Liga-se a:</strong> qualquer componente — aqui o formulário de newsletter; em Itinerários, a ordenação e o botão "Reservar".</p>
+              <p><strong>Acessibilidade:</strong> container com <code>aria-live</code> para leitores de tela anunciarem a mensagem.</p>
+            </HelpTip>
+          </div>
           <h2>Receba ofertas de última hora</h2>
           <p className={styles.newsDesc}>
             Ao enviar, uma <strong>notificação toast</strong> (estado global via

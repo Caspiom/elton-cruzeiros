@@ -1,0 +1,65 @@
+/* Accordion.module.css — escopo local via CSS Modules */
+
+.accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.item + .item {
+  border-top: 1px solid var(--border);
+}
+
+.heading {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: var(--surface);
+  color: var(--heading);
+  border: none;
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.trigger:hover {
+  background: var(--surface-2);
+}
+
+.icon {
+  flex: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--primary);
+}
+
+/* Painel: anima a altura via grid-template-rows 0fr -> 1fr */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+  background: var(--surface-2);
+}
+
+.panel.open {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.panel.open .panelInner {
+  padding: 0.85rem 1rem;
+}
